@@ -3,21 +3,17 @@
   background-repeat: no-repeat;
   background-size: contain;
   background-color: white;
+  border: none;
   width: 22px;
   height: 19px;
-  border: none;
   padding: 0;
+  margin: 0;
+  align-self: center;
+  cursor: pointer;
+  transition: opacity .7s ease;
 }
 
 .card__like-button:hover {
   opacity: 0.5;
   cursor: pointer;
-}
-
-.card__like-button_active {
-  background-image: url(../../../images/card-like-active.svg);
-}
-
-.card__like-button_active:hover {
-  opacity: 1.;
 }
