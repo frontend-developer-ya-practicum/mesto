@@ -19,3 +19,8 @@
     margin: 35px auto 0;
   }
 }
+
+.profile__add-button:hover {
+  opacity: 0.6;
+  cursor: pointer;
+}
