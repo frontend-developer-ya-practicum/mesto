@@ -1,22 +1,22 @@
-let profile = document.querySelector('.profile');
-let editProfileOpenButton = profile.querySelector('.profile__edit-button');
-let profileName = profile.querySelector('.profile__name');
-let profileAbout = profile.querySelector('.profile__about');
+const profile = document.querySelector('.profile');
+const editProfileOpenButton = profile.querySelector('.profile__edit-button');
+const profileName = profile.querySelector('.profile__name');
+const profileAbout = profile.querySelector('.profile__about');
 
-let popup = document.querySelector('.popup');
-let editProfileCloseButton = popup.querySelector('.popup__close');
-let editProfileForm = popup.querySelector('.popup__content')
-let editProfileName = popup.querySelector('.popup__input-name');
-let editProfileAbout = popup.querySelector('.popup__input-about');
+const editProfilePopup = document.querySelector('.popup_type_profile');
+const editProfileCloseButton = editProfilePopup.querySelector('.popup__close');
+const editProfileForm = editProfilePopup.querySelector('.popup__form')
+const editProfileName = editProfilePopup.querySelector('.popup__form-item_el_name');
+const editProfileAbout = editProfilePopup.querySelector('.popup__form-item_el_about');
 
 function openPopupEditProfile() {
-  popup.classList.add('popup_opened');
+  editProfilePopup.classList.remove('popup_hidden');
   editProfileName.value = profileName.textContent;
   editProfileAbout.value = profileAbout.textContent;
 }
 
 function closePopupEditProfile() {
-  popup.classList.remove('popup_opened');
+  editProfilePopup.classList.add('popup_hidden');
 }
 
 function savePopupEditProfile(event) {
