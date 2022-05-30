@@ -10,13 +10,13 @@ let editProfileName = popup.querySelector('.popup__input-name');
 let editProfileAbout = popup.querySelector('.popup__input-about');
 
 function openPopupEditProfile() {
-  popup.classList.add('popup__opened');
+  popup.classList.add('popup_opened');
   editProfileName.value = profileName.textContent;
   editProfileAbout.value = profileAbout.textContent;
 }
 
 function closePopupEditProfile() {
-  popup.classList.remove('popup__opened');
+  popup.classList.remove('popup_opened');
 }
 
 function savePopupEditProfile(event) {
