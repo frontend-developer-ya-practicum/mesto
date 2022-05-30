@@ -6,6 +6,7 @@
 
 @media screen and (max-width: 767px) {
   .profile__content {
+    max-width: 282px;
     gap: 10px;
   }
 }

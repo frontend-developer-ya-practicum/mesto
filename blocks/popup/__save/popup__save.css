@@ -12,6 +12,7 @@
   border: none;
   background: black;
   border-radius: 2px;
+  transition: opacity .7s ease;
 }
 
 @media (max-width: 767px) {
