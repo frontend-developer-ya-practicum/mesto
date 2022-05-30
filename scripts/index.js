@@ -1,40 +1,31 @@
-let profile = document.querySelector(".profile");
-let edit_profile_open_button = profile.querySelector(".profile__edit-button");
-let profile_name = profile.querySelector(".profile__name");
-let profile_about = profile.querySelector(".profile__about");
+let profile = document.querySelector('.profile');
+let editProfileOpenButton = profile.querySelector('.profile__edit-button');
+let profileName = profile.querySelector('.profile__name');
+let profileAbout = profile.querySelector('.profile__about');
 
-let popup = document.querySelector(".popup");
-let edit_profile_close_button = popup.querySelector(".popup__close");
-let edit_profile_save_button = popup.querySelector(".popup__save");
-let edit_profile_name = popup.querySelector(".popup__input-name");
-let edit_profile_about = popup.querySelector(".popup__input-about");
-
-let card_like_buttons = document.querySelectorAll(".card__like-button");
+let popup = document.querySelector('.popup');
+let editProfileCloseButton = popup.querySelector('.popup__close');
+let editProfileForm = popup.querySelector('.popup__content')
+let editProfileName = popup.querySelector('.popup__input-name');
+let editProfileAbout = popup.querySelector('.popup__input-about');
 
 function openPopupEditProfile() {
-  popup.classList.add("popup__opened");
-  edit_profile_name.value = profile_name.textContent;
-  edit_profile_about.value = profile_about.textContent;
+  popup.classList.add('popup__opened');
+  editProfileName.value = profileName.textContent;
+  editProfileAbout.value = profileAbout.textContent;
 }
 
 function closePopupEditProfile() {
-  popup.classList.remove("popup__opened");
+  popup.classList.remove('popup__opened');
 }
 
 function savePopupEditProfile(event) {
   event.preventDefault();
-  profile_name.textContent = edit_profile_name.value
-  profile_about.textContent = edit_profile_about.value
+  profileName.textContent = editProfileName.value
+  profileAbout.textContent = editProfileAbout.value
   closePopupEditProfile();
 }
 
-edit_profile_open_button.addEventListener("click", openPopupEditProfile);
-edit_profile_close_button.addEventListener("click", closePopupEditProfile);
-edit_profile_save_button.addEventListener("click", savePopupEditProfile);
-
-for (let i = 0; i < card_like_buttons.length; i++) {
-  card_like_buttons[i].addEventListener("click", function() {
-    card_like_buttons[i].classList.toggle("card__like-button_active");
-  });
-}
-
+editProfileOpenButton.addEventListener('click', openPopupEditProfile);
+editProfileCloseButton.addEventListener('click', closePopupEditProfile);
+editProfileForm.addEventListener('submit', savePopupEditProfile);
