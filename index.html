@@ -12,13 +12,92 @@
 
 <body class="page">
   <header class="header">
+    <div class="header__logo"></div>
   </header>
 
   <main class="content">
+    <section class="profile">
+      <div class="profile__avatar"></div>
+
+      <div class="profile__info">
+        <div class="profile__content">
+          <h1 class="profile__name">Жак-Ив Кусто</h1>
+          <button class="profile__edit-button" type="button"></button>
+        </div>
+        <p class="profile__about">Исследователь океана</p>
+      </div>
+
+      <button class="profile__add-button" type="button"></button>
+    </section>
+
+    <section class="cards">
+      <ul class="cards__grid">
+        <li class="card">
+          <img src="./images/card-altai.jpg" alt="Горный алтай" class="card__image">
+          <div class="card__content">
+            <h2 class="card__title">Горный алтай</h2>
+            <button class="card__like-button" type="button"></button>
+          </div>
+        </li>
+
+        <li class="card">
+          <img src="./images/card-elbrus.jpg" alt="Эльбрус" class="card__image">
+          <div class="card__content">
+            <h2 class="card__title">Эльбрус</h2>
+            <button class="card__like-button" type="button"></button>
+          </div>
+        </li>
+
+        <li class="card">
+          <img src="./images/card-kamchatka-vulkan.jpg" alt="Камчатка" class="card__image">
+          <div class="card__content">
+            <h2 class="card__title">Камчатка</h2>
+            <button class="card__like-button" type="button"></button>
+          </div>
+        </li>
+
+        <li class="card">
+          <img src="./images/card-baikal.jpg" alt="Байкал" class="card__image">
+          <div class="card__content">
+            <h2 class="card__title">Байкал</h2>
+            <button class="card__like-button" type="button"></button>
+          </div>
+        </li>
+
+        <li class="card">
+          <img src="./images/card-vladivostok.jpg" alt="Владивосток" class="card__image">
+          <div class="card__content">
+            <h2 class="card__title">Владивосток</h2>
+            <button class="card__like-button" type="button"></button>
+          </div>
+        </li>
+
+        <li class="card">
+          <img src="./images/card-manpupuner.jpg" alt="Маньпупунёр" class="card__image">
+          <div class="card__content">
+            <h2 class="card__title">Маньпупунёр</h2>
+            <button class="card__like-button" type="button"></button>
+          </div>
+        </li>
+      </ul>
+    </section>
   </main>
 
   <footer class="footer">
+    <p class="footer__copyright">&copy; 2022 Mesto Russia</p>
   </footer>
+
+  <div class="popup">
+    <form class="popup__content" method="post">
+      <button class="popup__close" type="button"></button>
+      <h2 class="popup__title">Редактировать профиль</h2>
+      <input class="popup__input popup__input-name" type="text" placeholder="Имя">
+      <input class="popup__input popup__input-about" type="text" placeholder="Описание">
+      <button class="popup__save" type="submit">Сохранить</button>
+    </form>
+  </div>
+
+  <script src="./scripts/script.js"></script>
 </body>
 
 </html>
