@@ -32,53 +32,7 @@
 
     <section class="cards">
       <ul class="cards__grid">
-        <li class="card">
-          <img src="./images/card-altai.jpg" alt="Горный алтай" class="card__image">
-          <div class="card__content">
-            <h2 class="card__title">Горный алтай</h2>
-            <button class="card__like-button" type="button" aria-label="Поставить лайк"></button>
-          </div>
-        </li>
 
-        <li class="card">
-          <img src="./images/card-elbrus.jpg" alt="Эльбрус" class="card__image">
-          <div class="card__content">
-            <h2 class="card__title">Эльбрус</h2>
-            <button class="card__like-button" type="button" aria-label="Поставить лайк"></button>
-          </div>
-        </li>
-
-        <li class="card">
-          <img src="./images/card-kamchatka-vulkan.jpg" alt="Камчатка" class="card__image">
-          <div class="card__content">
-            <h2 class="card__title">Камчатка</h2>
-            <button class="card__like-button" type="button" aria-label="Поставить лайк"></button>
-          </div>
-        </li>
-
-        <li class="card">
-          <img src="./images/card-baikal.jpg" alt="Байкал" class="card__image">
-          <div class="card__content">
-            <h2 class="card__title">Байкал</h2>
-            <button class="card__like-button" type="button" aria-label="Поставить лайк"></button>
-          </div>
-        </li>
-
-        <li class="card">
-          <img src="./images/card-vladivostok.jpg" alt="Владивосток" class="card__image">
-          <div class="card__content">
-            <h2 class="card__title">Владивосток</h2>
-            <button class="card__like-button" type="button" aria-label="Поставить лайк"></button>
-          </div>
-        </li>
-
-        <li class="card">
-          <img src="./images/card-manpupuner.jpg" alt="Маньпупунёр" class="card__image">
-          <div class="card__content">
-            <h2 class="card__title">Маньпупунёр</h2>
-            <button class="card__like-button" type="button" aria-label="Поставить лайк"></button>
-          </div>
-        </li>
       </ul>
     </section>
   </main>
@@ -101,6 +55,16 @@
       </form>
     </div>
   </div>
+
+  <template id="template-card">
+    <li class="card">
+      <img class="card__image" src="" alt="">
+      <div class="card__content">
+        <h2 class="card__title"></h2>
+        <button class="card__like-button" type="button" aria-label="Поставить лайк"></button>
+      </div>
+    </li>
+  </template>
 
   <script src="./scripts/index.js"></script>
 </body>
