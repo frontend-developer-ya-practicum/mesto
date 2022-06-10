@@ -63,7 +63,7 @@ function closePopup(popup) {
   popup.classList.remove('popup_opened');
 }
 
-function addCard(imageName, imageLink) {
+function createCard(imageName, imageLink) {
   const cardTemplate = document.querySelector("#template-card").content;
   const cardElement = cardTemplate.querySelector('.card').cloneNode(true);
 
@@ -88,6 +88,11 @@ function addCard(imageName, imageLink) {
     imageCaption.textContent = imageName;
   });
 
+  return cardElement;
+}
+
+function addCard(imageName, imageLink) {
+  const cardElement = createCard(imageName, imageLink);
   cardsGrid.prepend(cardElement);
 }
 
