@@ -125,6 +125,7 @@ cardForm.addEventListener('submit', function (evt) {
 
   addCard(cardNameInput.value, cardLinkInput.value);
   closePopup(cardPopup);
+  evt.target.reset();
 });
 
 closeButtons.forEach((button) => {
