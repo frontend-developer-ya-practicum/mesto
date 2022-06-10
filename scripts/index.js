@@ -30,9 +30,16 @@ function addCard(card) {
 
   const cardTemplate = document.querySelector("#template-card").content;
   const cardElement = cardTemplate.querySelector('.card').cloneNode(true);
+
   cardElement.querySelector('.card__image').src = card.link;
   cardElement.querySelector('.card__image').alt = card.name;
   cardElement.querySelector('.card__title').textContent = card.name;
+
+  const button = cardElement.querySelector('.card__like-button')
+  button.addEventListener('click', function (event) {
+    const target = event.target;
+    target.classList.toggle('card__like-button_active');
+  });
 
   cardsGrid.prepend(cardElement);
 }
