@@ -32,53 +32,7 @@
 
     <section class="cards">
       <ul class="cards__grid">
-        <li class="card">
-          <img src="./images/card-altai.jpg" alt="Горный алтай" class="card__image">
-          <div class="card__content">
-            <h2 class="card__title">Горный алтай</h2>
-            <button class="card__like-button" type="button" aria-label="Поставить лайк"></button>
-          </div>
-        </li>
 
-        <li class="card">
-          <img src="./images/card-elbrus.jpg" alt="Эльбрус" class="card__image">
-          <div class="card__content">
-            <h2 class="card__title">Эльбрус</h2>
-            <button class="card__like-button" type="button" aria-label="Поставить лайк"></button>
-          </div>
-        </li>
-
-        <li class="card">
-          <img src="./images/card-kamchatka-vulkan.jpg" alt="Камчатка" class="card__image">
-          <div class="card__content">
-            <h2 class="card__title">Камчатка</h2>
-            <button class="card__like-button" type="button" aria-label="Поставить лайк"></button>
-          </div>
-        </li>
-
-        <li class="card">
-          <img src="./images/card-baikal.jpg" alt="Байкал" class="card__image">
-          <div class="card__content">
-            <h2 class="card__title">Байкал</h2>
-            <button class="card__like-button" type="button" aria-label="Поставить лайк"></button>
-          </div>
-        </li>
-
-        <li class="card">
-          <img src="./images/card-vladivostok.jpg" alt="Владивосток" class="card__image">
-          <div class="card__content">
-            <h2 class="card__title">Владивосток</h2>
-            <button class="card__like-button" type="button" aria-label="Поставить лайк"></button>
-          </div>
-        </li>
-
-        <li class="card">
-          <img src="./images/card-manpupuner.jpg" alt="Маньпупунёр" class="card__image">
-          <div class="card__content">
-            <h2 class="card__title">Маньпупунёр</h2>
-            <button class="card__like-button" type="button" aria-label="Поставить лайк"></button>
-          </div>
-        </li>
       </ul>
     </section>
   </main>
@@ -87,7 +41,7 @@
     <p class="footer__copyright">&copy; 2022 Mesto Russia</p>
   </footer>
 
-  <div class="popup">
+  <div class="popup popup_type_profile">
     <div class="popup__container">
       <button class="popup__close" type="button" aria-label="Закрыть окно"></button>
       <form class="popup__form" name="profile-form">
@@ -101,6 +55,41 @@
       </form>
     </div>
   </div>
+
+  <div class="popup popup_type_card">
+    <div class="popup__container">
+      <button class="popup__close" type="button" aria-label="Закрыть окно"></button>
+      <form class="popup__form" name="profile-form">
+        <h2 class="popup__form-title">Новое место</h2>
+        <fieldset class="popup__input-container">
+          <input class="popup__form-item popup__form-item_el_place" name="place-name" type="text"
+            placeholder="Название">
+          <input class="popup__form-item popup__form-item_el_link" name="place-link" type="text"
+            placeholder="Ссылка на картинку">
+        </fieldset>
+        <button class="popup__submit" type="submit">Сохранить</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="popup popup_type_image">
+    <div class="popup__image-container">
+      <button class="popup__close" type="button" aria-label="Закрыть окно"></button>
+      <img class="popup__image" src="" alt="">
+      <p class="popup__image-caption"></p>
+    </div>
+  </div>
+
+  <template id="template-card">
+    <li class="card">
+      <button class="card__delete-button" type="button" aria-label="Удалить картинку"></button>
+      <img class="card__image" src="" alt="">
+      <div class="card__content">
+        <h2 class="card__title"></h2>
+        <button class="card__like-button" type="button" aria-label="Поставить лайк"></button>
+      </div>
+    </li>
+  </template>
 
   <script src="./scripts/index.js"></script>
 </body>
