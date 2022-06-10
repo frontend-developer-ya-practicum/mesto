@@ -35,10 +35,15 @@ function addCard(card) {
   cardElement.querySelector('.card__image').alt = card.name;
   cardElement.querySelector('.card__title').textContent = card.name;
 
-  const button = cardElement.querySelector('.card__like-button')
-  button.addEventListener('click', function (event) {
+  const likeButton = cardElement.querySelector('.card__like-button')
+  likeButton.addEventListener('click', function (event) {
     const target = event.target;
     target.classList.toggle('card__like-button_active');
+  });
+
+  const deleteButton = cardElement.querySelector('.card__delete-button');
+  deleteButton.addEventListener('click', function () {
+    cardElement.remove();
   });
 
   cardsGrid.prepend(cardElement);
