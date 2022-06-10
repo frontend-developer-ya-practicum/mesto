@@ -35,14 +35,12 @@ const profileName = profile.querySelector('.profile__name');
 const profileAbout = profile.querySelector('.profile__about');
 
 const profilePopup = document.querySelector('.popup_type_profile');
-const profileCloseButton = profilePopup.querySelector('.popup__close');
 const profileForm = profilePopup.querySelector('.popup__form');
 const profileNameInput = profileForm.querySelector('.popup__form-item_el_name');
 const profileAboutInput = profileForm.querySelector('.popup__form-item_el_about');
 
 
 const cardPopup = document.querySelector('.popup_type_card');
-const cardCloseButton = cardPopup.querySelector('.popup__close');
 const cardForm = cardPopup.querySelector('.popup__form');
 const cardNameInput = cardForm.querySelector('.popup__form-item_el_place');
 const cardLinkInput = cardForm.querySelector('.popup__form-item_el_link');
@@ -52,7 +50,8 @@ const cardOpenButton = document.querySelector('.profile__add-button');
 const imagePopup = document.querySelector('.popup_type_image');
 const image = document.querySelector('.popup__image');
 const imageCaption = document.querySelector('.popup__image-caption');
-const imageCloseButon = imagePopup.querySelector('.popup__close');
+
+const closeButtons = document.querySelectorAll('.popup__close');
 
 
 function openPopup(popup) {
@@ -109,8 +108,6 @@ profileOpenButton.addEventListener('click', function () {
   profileAboutInput.value = profileAbout.textContent;
 });
 
-profileCloseButton.addEventListener('click', () => closePopup(profilePopup));
-
 profileForm.addEventListener('submit', function (evt) {
   evt.preventDefault();
 
@@ -123,8 +120,6 @@ profileForm.addEventListener('submit', function (evt) {
 
 cardOpenButton.addEventListener('click', () => openPopup(cardPopup));
 
-cardCloseButton.addEventListener('click', () => closePopup(cardPopup));
-
 cardForm.addEventListener('submit', function (evt) {
   evt.preventDefault();
 
@@ -132,7 +127,9 @@ cardForm.addEventListener('submit', function (evt) {
   closePopup(cardPopup);
 });
 
-
-imageCloseButon.addEventListener('click', () => closePopup(imagePopup));
+closeButtons.forEach((button) => {
+  const popup = button.closest('.popup');
+  button.addEventListener('click', () => closePopup(popup));
+});
 
 loadCards();
