@@ -54,12 +54,24 @@ const imageCaption = document.querySelector('.popup__image-caption');
 const closeButtons = document.querySelectorAll('.popup__close');
 const popups = [profilePopup, cardPopup, imagePopup];
 
+
+let openedPopup = undefined;
+function closePopupOnEsc(evt) {
+  if (evt.code === 'Escape') {
+    closePopup(openedPopup);
+  }
+}
+
 function openPopup(popup) {
   popup.classList.add('popup_opened');
+  document.addEventListener('keydown', closePopupOnEsc);
+  openedPopup = popup;
 }
 
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
+  document.removeEventListener('keydown', closePopupOnEsc);
+  openedPopup = undefined;
 }
 
 function createCard(imageName, imageLink) {
