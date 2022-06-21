@@ -36,14 +36,14 @@ const profileAbout = profile.querySelector('.profile__about');
 
 const profilePopup = document.querySelector('.popup_type_profile');
 const profileForm = profilePopup.querySelector('.popup__form');
-const profileNameInput = profileForm.querySelector('.popup__form-item_el_name');
-const profileAboutInput = profileForm.querySelector('.popup__form-item_el_about');
+const profileNameInput = profileForm.elements.name;
+const profileAboutInput = profileForm.elements.about;
 
 
 const cardPopup = document.querySelector('.popup_type_card');
 const cardForm = cardPopup.querySelector('.popup__form');
-const cardNameInput = cardForm.querySelector('.popup__form-item_el_place');
-const cardLinkInput = cardForm.querySelector('.popup__form-item_el_link');
+const cardNameInput = cardForm.elements.name;
+const cardLinkInput = cardForm.elements.link;
 const cardOpenButton = document.querySelector('.profile__add-button');
 
 
