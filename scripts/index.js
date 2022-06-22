@@ -15,6 +15,7 @@ const cardForm = cardPopup.querySelector('.popup__form');
 const cardNameInput = cardForm.elements.name;
 const cardLinkInput = cardForm.elements.link;
 const cardOpenButton = document.querySelector('.profile__add-button');
+const cardSubmitButton = cardPopup.querySelector('.popup__submit');
 
 const imagePopup = document.querySelector('.popup_type_image');
 const image = document.querySelector('.popup__image');
@@ -74,17 +75,22 @@ function submitProfileForm(evt) {
   closePopup(profilePopup);
 }
 
+function disableButton(button) {
+  button.classList.add('popup__submit_disabled');
+  button.disabled = true;
+}
+
 function submitCardForm(evt) {
   evt.preventDefault();
 
+  closePopup(cardPopup);
   const cardData = {
     name: cardNameInput.value,
     link: cardLinkInput.value
   };
   addCard(cardData);
-  closePopup(cardPopup);
   evt.target.reset();
-  evt.submitter.classList.add('popup__submit_disabled');
+  disableButton(cardSubmitButton);
 }
 
 function toggleLikeButton(evt) {
@@ -138,3 +144,4 @@ popups.forEach((popup) => {
 });
 
 loadCards();
+disableButton(cardSubmitButton);
