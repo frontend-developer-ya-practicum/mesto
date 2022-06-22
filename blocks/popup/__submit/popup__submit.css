@@ -14,7 +14,7 @@
   font-size: 18px;
   line-height: 22px;
   text-align: center;
-  margin-top: 48px;
+  margin-top: 13px;
 }
 
 .popup__submit:hover {
@@ -23,7 +23,7 @@
 
 @media screen and (max-width: 600px) {
   .popup__submit {
-    margin-top: 45px;
+    margin-top: 10px;
     height: 46px;
     font-size: 14px;
     line-height: 17px;

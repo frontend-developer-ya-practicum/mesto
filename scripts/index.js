@@ -36,14 +36,14 @@ const profileAbout = profile.querySelector('.profile__about');
 
 const profilePopup = document.querySelector('.popup_type_profile');
 const profileForm = profilePopup.querySelector('.popup__form');
-const profileNameInput = profileForm.querySelector('.popup__form-item_el_name');
-const profileAboutInput = profileForm.querySelector('.popup__form-item_el_about');
+const profileNameInput = profileForm.elements.name;
+const profileAboutInput = profileForm.elements.about;
 
 
 const cardPopup = document.querySelector('.popup_type_card');
 const cardForm = cardPopup.querySelector('.popup__form');
-const cardNameInput = cardForm.querySelector('.popup__form-item_el_place');
-const cardLinkInput = cardForm.querySelector('.popup__form-item_el_link');
+const cardNameInput = cardForm.elements.name;
+const cardLinkInput = cardForm.elements.link;
 const cardOpenButton = document.querySelector('.profile__add-button');
 
 
@@ -52,14 +52,26 @@ const image = document.querySelector('.popup__image');
 const imageCaption = document.querySelector('.popup__image-caption');
 
 const closeButtons = document.querySelectorAll('.popup__close');
+const popups = [profilePopup, cardPopup, imagePopup];
 
+
+let openedPopup = undefined;
+function closePopupOnEsc(evt) {
+  if (evt.code === 'Escape') {
+    closePopup(openedPopup);
+  }
+}
 
 function openPopup(popup) {
   popup.classList.add('popup_opened');
+  document.addEventListener('keydown', closePopupOnEsc);
+  openedPopup = popup;
 }
 
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
+  document.removeEventListener('keydown', closePopupOnEsc);
+  openedPopup = undefined;
 }
 
 function createCard(imageName, imageLink) {
@@ -126,11 +138,20 @@ cardForm.addEventListener('submit', function (evt) {
   addCard(cardNameInput.value, cardLinkInput.value);
   closePopup(cardPopup);
   evt.target.reset();
+  evt.submitter.classList.add('popup__submit_disabled');
 });
 
 closeButtons.forEach((button) => {
   const popup = button.closest('.popup');
   button.addEventListener('click', () => closePopup(popup));
+});
+
+popups.forEach((popup) => {
+  popup.addEventListener('click', (evt) => {
+    if (evt.target === evt.currentTarget) {
+      closePopup(popup);
+    }
+  });
 });
 
 loadCards();
