@@ -138,6 +138,7 @@ cardForm.addEventListener('submit', function (evt) {
   addCard(cardNameInput.value, cardLinkInput.value);
   closePopup(cardPopup);
   evt.target.reset();
+  evt.submitter.classList.add('popup__submit_disabled');
 });
 
 closeButtons.forEach((button) => {
