@@ -28,19 +28,29 @@ const hasInvalidInput = (inputsList) => {
   });
 }
 
+const disableButton = (buttonElement, settings) => {
+  buttonElement.classList.add(settings.inactiveButtonClass);
+  buttonElement.disabled = true;
+}
+
+const activateButton = (buttonElement, settings) => {
+  buttonElement.classList.remove(settings.inactiveButtonClass);
+  buttonElement.disabled = false;
+}
+
 const toggleButtonState = (inputsList, buttonElement, settings) => {
   if (hasInvalidInput(inputsList)) {
-    buttonElement.classList.add(settings.inactiveButtonClass);
-    buttonElement.disabled = true;
+    disableButton(buttonElement, settings);
   } else {
-    buttonElement.classList.remove(settings.inactiveButtonClass);
-    buttonElement.disabled = false;
+    activateButton(buttonElement, settings);
   }
 }
 
 const setEventListeners = (formElement, settings) => {
   const inputsList = Array.from(formElement.querySelectorAll(settings.inputSelector));
   const buttonElement = formElement.querySelector(settings.submitButtonSelector);
+
+  toggleButtonState(inputsList, buttonElement, settings);
 
   inputsList.forEach((inputElement) => {
     inputElement.addEventListener('input', () => {

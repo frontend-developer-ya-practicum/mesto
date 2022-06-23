@@ -15,7 +15,6 @@ const cardForm = cardPopup.querySelector('.popup__form');
 const cardNameInput = cardForm.elements.name;
 const cardLinkInput = cardForm.elements.link;
 const cardOpenButton = document.querySelector('.profile__add-button');
-const cardSubmitButton = cardPopup.querySelector('.popup__submit');
 
 const imagePopup = document.querySelector('.popup_type_image');
 const image = document.querySelector('.popup__image');
@@ -56,9 +55,14 @@ function openImagePopup(cardData) {
   openPopup(imagePopup);
 }
 
+function setInput(inputElement, text) {
+  inputElement.value = text;
+  inputElement.dispatchEvent(new Event('input'));
+}
+
 function openProfilePopup() {
-  profileNameInput.value = profileName.textContent;
-  profileAboutInput.value = profileAbout.textContent;
+  setInput(profileNameInput, profileName.textContent);
+  setInput(profileAboutInput, profileAbout.textContent);
   openPopup(profilePopup);
 }
 
@@ -75,11 +79,6 @@ function submitProfileForm(evt) {
   closePopup(profilePopup);
 }
 
-function disableButton(button) {
-  button.classList.add('popup__submit_disabled');
-  button.disabled = true;
-}
-
 function submitCardForm(evt) {
   evt.preventDefault();
 
@@ -90,7 +89,7 @@ function submitCardForm(evt) {
   };
   addCard(cardData);
   evt.target.reset();
-  disableButton(cardSubmitButton);
+  disableButton(evt.submitter);
 }
 
 function toggleLikeButton(evt) {
@@ -144,4 +143,3 @@ popups.forEach((popup) => {
 });
 
 loadCards();
-disableButton(cardSubmitButton);
