@@ -89,7 +89,7 @@ function submitCardForm(evt) {
   };
   addCard(cardData);
   evt.target.reset();
-  disableButton(evt.submitter);
+  disableButton(evt.submitter, settings);
 }
 
 function toggleLikeButton(evt) {
