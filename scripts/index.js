@@ -1,7 +1,7 @@
 import Card from './Card.js'
+import FromValidator from './FormValidator.js';
 import initialCards from './cards.js'
 import { closePopupOnEvent, openPopup, closePopup } from './utils.js';
-import { disableButton, settings } from './validate.js'
 
 const cardsGrid = document.querySelector('.cards__grid');
 
@@ -22,6 +22,23 @@ const cardLinkInput = cardForm.elements.link;
 const cardOpenButton = document.querySelector('.profile__add-button');
 
 const popups = document.querySelectorAll('.popup');
+
+const validationSettings = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__submit',
+  inactiveButtonClass: 'popup__submit_disabled',
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'popup__input-error_active'
+};
+
+const formList = Array.from(
+  document.querySelectorAll(validationSettings.formSelector));
+
+function validateFrom(formElement) {
+  const validator = new FromValidator(validationSettings, formElement);
+  validator.enableValidation();
+}
 
 function setInput(inputElement, text) {
   inputElement.value = text;
@@ -57,17 +74,13 @@ function submitCardForm(evt) {
   };
   addCard(cardData);
   evt.target.reset();
-  disableButton(evt.submitter, settings);
+  validateFrom(evt.target);
 }
 
 function addCard(cardData) {
   const card = new Card(cardData, '#template-card');
   const cardElement = card.generateCard();
   cardsGrid.prepend(cardElement);
-}
-
-function loadCards() {
-  initialCards.forEach(card => addCard(card));
 }
 
 profileOpenButton.addEventListener('click', openProfilePopup);
@@ -80,4 +93,5 @@ popups.forEach((popup) => {
   popup.addEventListener('click', closePopupOnEvent);
 });
 
-loadCards();
+initialCards.forEach(card => addCard(card));
+formList.forEach(formElement => validateFrom(formElement));
