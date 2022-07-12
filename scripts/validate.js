@@ -28,7 +28,7 @@ const hasInvalidInput = (inputsList) => {
   });
 }
 
-const disableButton = (buttonElement, settings) => {
+export const disableButton = (buttonElement, settings) => {
   buttonElement.classList.add(settings.inactiveButtonClass);
   buttonElement.disabled = true;
 }
@@ -71,7 +71,7 @@ const enableValidation = (settings) => {
   });
 }
 
-const settings = {
+export const settings = {
   formSelector: '.popup__form',
   inputSelector: '.popup__input',
   submitButtonSelector: '.popup__submit',

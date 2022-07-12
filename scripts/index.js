@@ -1,3 +1,8 @@
+import Card from './Card.js'
+import initialCards from './cards.js'
+import { closePopupOnEvent, openPopup, closePopup } from './utils.js';
+import { disableButton, settings } from './validate.js'
+
 const cardsGrid = document.querySelector('.cards__grid');
 
 const profile = document.querySelector('.profile');
@@ -16,44 +21,7 @@ const cardNameInput = cardForm.elements.name;
 const cardLinkInput = cardForm.elements.link;
 const cardOpenButton = document.querySelector('.profile__add-button');
 
-const imagePopup = document.querySelector('.popup_type_image');
-const image = document.querySelector('.popup__image');
-const imageCaption = document.querySelector('.popup__image-caption');
-
 const popups = document.querySelectorAll('.popup');
-
-
-let openedPopup = null;
-function closePopupOnEsc(evt) {
-  if (evt.code === 'Escape') {
-    closePopup(openedPopup);
-  }
-}
-
-function openPopup(popup) {
-  popup.classList.add('popup_opened');
-  document.addEventListener('keydown', closePopupOnEsc);
-  openedPopup = popup;
-}
-
-function closePopup(popup) {
-  popup.classList.remove('popup_opened');
-  document.removeEventListener('keydown', closePopupOnEsc);
-  openedPopup = null;
-}
-
-function closePopupOnEvent(evt) {
-  if (evt.target === evt.currentTarget || evt.target.classList.contains('popup__close')) {
-    closePopup(evt.currentTarget);
-  }
-}
-
-function openImagePopup(cardData) {
-  image.src = cardData.link;
-  image.alt = cardData.name;
-  imageCaption.textContent = cardData.name;
-  openPopup(imagePopup);
-}
 
 function setInput(inputElement, text) {
   inputElement.value = text;
@@ -92,39 +60,9 @@ function submitCardForm(evt) {
   disableButton(evt.submitter, settings);
 }
 
-function toggleLikeButton(evt) {
-  evt.target.classList.toggle('card__like-button_active');
-}
-
-function deleteCard(evt) {
-  const cardElement = evt.target.closest('.card');
-  cardElement.remove();
-}
-
-function createCard(cardData) {
-  const cardTemplate = document.querySelector("#template-card").content;
-  const cardElement = cardTemplate.querySelector('.card').cloneNode(true);
-
-  const cardImage = cardElement.querySelector('.card__image');
-  const cardTitle = cardElement.querySelector('.card__title');
-
-  cardImage.src = cardData.link;
-  cardImage.alt = cardData.name;
-  cardTitle.textContent = cardData.name;
-
-  const buttonLike = cardElement.querySelector('.card__like-button');
-  buttonLike.addEventListener('click', toggleLikeButton);
-
-  const buttonDelete = cardElement.querySelector('.card__delete-button');
-  buttonDelete.addEventListener('click', deleteCard);
-
-  cardImage.addEventListener('click', () => openImagePopup(cardData));
-
-  return cardElement;
-}
-
 function addCard(cardData) {
-  const cardElement = createCard(cardData);
+  const card = new Card(cardData, '#template-card');
+  const cardElement = card.generateCard();
   cardsGrid.prepend(cardElement);
 }
 
