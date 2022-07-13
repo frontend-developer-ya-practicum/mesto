@@ -1,13 +1,8 @@
-import { openPopup } from "./utils.js";
-
-const popup = document.querySelector('.popup_type_image');
-const popupImage = document.querySelector('.popup__image');
-const popupCaption = document.querySelector('.popup__image-caption');
-
 class Card {
-  constructor(cardData, cardSelector) {
+  constructor(cardData, cardSelector, openImagePopup) {
     this._cardData = cardData
     this._cardSelector = cardSelector
+    this._openImagePopup = openImagePopup
   }
 
   generateCard() {
@@ -44,13 +39,7 @@ class Card {
 
   _delete() {
     this._element.remove();
-  }
-
-  _openImagePopup() {
-    popupImage.src = this._cardData.link;
-    popupImage.alt = this._cardData.name;
-    popupCaption.textContent = this._cardData.name;
-    openPopup(popup);
+    this._element = null;
   }
 
   _setEventListeners() {
@@ -61,7 +50,7 @@ class Card {
       this._delete();
     });
     this._cardImage.addEventListener('click', () => {
-      this._openImagePopup();
+      this._openImagePopup(this._cardData);
     });
   }
 }

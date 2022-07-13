@@ -21,6 +21,10 @@ const cardNameInput = cardForm.elements.name;
 const cardLinkInput = cardForm.elements.link;
 const cardOpenButton = document.querySelector('.profile__add-button');
 
+const imagePopup = document.querySelector('.popup_type_image');
+const image = document.querySelector('.popup__image');
+const imageCaption = document.querySelector('.popup__image-caption');
+
 const popups = document.querySelectorAll('.popup');
 
 const validationSettings = {
@@ -38,6 +42,13 @@ const formList = Array.from(
 function validateFrom(formElement) {
   const validator = new FromValidator(validationSettings, formElement);
   validator.enableValidation();
+}
+
+function openImagePopup(cardData) {
+  image.src = cardData.link;
+  image.alt = cardData.name;
+  imageCaption.textContent = cardData.name;
+  openPopup(imagePopup);
 }
 
 function setInput(inputElement, text) {
@@ -78,7 +89,7 @@ function submitCardForm(evt) {
 }
 
 function addCard(cardData) {
-  const card = new Card(cardData, '#template-card');
+  const card = new Card(cardData, '#template-card', openImagePopup);
   const cardElement = card.generateCard();
   cardsGrid.prepend(cardElement);
 }
