@@ -1,6 +1,6 @@
-let openedPopup = null;
 function closePopupOnEsc(evt) {
   if (evt.code === 'Escape') {
+    const openedPopup = document.querySelector('.popup_opened');
     closePopup(openedPopup);
   }
 }
@@ -8,13 +8,11 @@ function closePopupOnEsc(evt) {
 function openPopup(popup) {
   popup.classList.add('popup_opened');
   document.addEventListener('keydown', closePopupOnEsc);
-  openedPopup = popup;
 }
 
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
   document.removeEventListener('keydown', closePopupOnEsc);
-  openedPopup = null;
 }
 
 function closePopupOnEvent(evt) {
