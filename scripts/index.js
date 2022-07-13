@@ -78,6 +78,8 @@ function openProfilePopup() {
 }
 
 function openCardPopup() {
+  cardForm.reset();
+  newCardValidation.resetValidation();
   openPopup(cardPopup);
 }
 
@@ -97,8 +99,6 @@ function submitCardForm(evt) {
     link: cardLinkInput.value
   };
   addCard(cardData);
-  evt.target.reset();
-  newCardValidation.toggleButtonState();
 }
 
 function createCard(cardData) {
