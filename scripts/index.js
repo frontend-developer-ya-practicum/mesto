@@ -2,11 +2,10 @@ import Card from './Card.js';
 import FormValidator from './FormValidator.js';
 import Section from './Section.js';
 import initialCards from './cards.js';
+import UserInfo from './UserInfo.js';
 
 const profile = document.querySelector('.profile');
 const profileOpenButton = profile.querySelector('.profile__edit-button');
-const profileName = profile.querySelector('.profile__name');
-const profileAbout = profile.querySelector('.profile__about');
 
 const profilePopup = document.querySelector('.popup_type_profile');
 const profileForm = profilePopup.querySelector('.popup__form');
@@ -55,6 +54,10 @@ const cardsList = new Section({
 }, cardListSelector);
 cardsList.renderItems();
 
+const userNameSelector = '.profile__name';
+const userAboutSelector = '.profile__about'
+const userInfo = new UserInfo(userNameSelector, userAboutSelector);
+
 function closePopupOnEsc(evt) {
   if (evt.code === 'Escape') {
     const openedPopup = document.querySelector('.popup_opened');
@@ -86,8 +89,9 @@ function openImagePopup(cardItem) {
 }
 
 function openProfilePopup() {
-  profileNameInput.value = profileName.textContent;
-  profileAboutInput.value = profileAbout.textContent;
+  const {name, about} = userInfo.getUserInfo();
+  profileNameInput.value = name;
+  profileAboutInput.value = about;
   profileValidation.resetValidation();
   openPopup(profilePopup);
 }
@@ -100,21 +104,23 @@ function openCardPopup() {
 
 function submitProfileForm(evt) {
   evt.preventDefault();
-  profileName.textContent = profileNameInput.value;
-  profileAbout.textContent = profileAboutInput.value;
+  userInfo.setUserInfo({
+    name: profileNameInput.value,
+    about: profileAboutInput.value,
+  });
   closePopup(profilePopup);
 }
 
 function submitCardForm(evt) {
   evt.preventDefault();
 
-  closePopup(cardPopup);
   const cardItem = {
     name: cardNameInput.value,
     link: cardLinkInput.value
   };
   const cardElement = createCard(cardItem);
   cardsList.addItem(cardElement);
+  closePopup(cardPopup);
 }
 
 profileOpenButton.addEventListener('click', openProfilePopup);
