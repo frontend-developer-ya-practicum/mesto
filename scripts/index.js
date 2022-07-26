@@ -1,8 +1,7 @@
 import Card from './Card.js';
 import FormValidator from './FormValidator.js';
+import Section from './Section.js';
 import initialCards from './cards.js';
-
-const cardsGrid = document.querySelector('.cards__grid');
 
 const profile = document.querySelector('.profile');
 const profileOpenButton = profile.querySelector('.profile__edit-button');
@@ -40,6 +39,22 @@ const newCardValidation = new FormValidator(selectors, cardForm);
 profileValidation.enableValidation();
 newCardValidation.enableValidation();
 
+
+function createCard(cardItem) {
+  const card = new Card(cardItem, '#template-card', openImagePopup);
+  return card.generateCard();
+}
+
+const cardListSelector = '.cards__grid';
+const cardsList = new Section({
+  items: initialCards,
+  renderer: (cardItem) => {
+    const cardElement = createCard(cardItem)
+    cardsList.addItem(cardElement);
+  },
+}, cardListSelector);
+cardsList.renderItems();
+
 function closePopupOnEsc(evt) {
   if (evt.code === 'Escape') {
     const openedPopup = document.querySelector('.popup_opened');
@@ -63,10 +78,10 @@ function closePopupOnEvent(evt) {
   }
 }
 
-function openImagePopup(cardData) {
-  image.src = cardData.link;
-  image.alt = cardData.name;
-  imageCaption.textContent = cardData.name;
+function openImagePopup(cardItem) {
+  image.src = cardItem.link;
+  image.alt = cardItem.name;
+  imageCaption.textContent = cardItem.name;
   openPopup(imagePopup);
 }
 
@@ -94,25 +109,12 @@ function submitCardForm(evt) {
   evt.preventDefault();
 
   closePopup(cardPopup);
-  const cardData = {
+  const cardItem = {
     name: cardNameInput.value,
     link: cardLinkInput.value
   };
-  addCard(cardData);
-}
-
-function createCard(cardData) {
-  const card = new Card(cardData, '#template-card', openImagePopup);
-  return card.generateCard();
-}
-
-function addCard(cardData) {
-  const cardElement = createCard(cardData);
-  cardsGrid.prepend(cardElement);
-}
-
-function loadCards() {
-  initialCards.forEach(cardData => addCard(cardData));
+  const cardElement = createCard(cardItem);
+  cardsList.addItem(cardElement);
 }
 
 profileOpenButton.addEventListener('click', openProfilePopup);
@@ -124,5 +126,3 @@ cardForm.addEventListener('submit', submitCardForm);
 popups.forEach((popup) => {
   popup.addEventListener('click', closePopupOnEvent);
 });
-
-loadCards();
