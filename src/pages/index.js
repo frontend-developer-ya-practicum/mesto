@@ -1,31 +1,26 @@
 import './index.css';
+
 import Card from '../scripts/components/Card.js';
 import FormValidator from '../scripts/components/FormValidator.js';
-import Section from '../scripts/components/Section.js';
-import initialCards from '../scripts/utils/constants.js';
-import UserInfo from '../scripts/components/UserInfo.js';
 import PopupWithImage from '../scripts/components/PopupWithImage.js';
 import PopupWithForm from '../scripts/components/PopupWithForm.js';
+import Section from '../scripts/components/Section.js';
+import UserInfo from '../scripts/components/UserInfo.js';
 
-const profileForm = document.querySelector('.popup_type_profile .popup__form');
-const profileOpenButton = document.querySelector('.profile__edit-button');
+import {
+  initialCards,
+  profileForm,
+  profileOpenButton,
+  cardForm,
+  cardOpenButton,
+  validationSelectors
+} from '../scripts/utils/constants.js';
 
-const cardForm = document.querySelector('.popup_type_card .popup__form');
-const cardOpenButton = document.querySelector('.profile__add-button');
 
-const selectors = {
-  formSelector: '.popup__form',
-  inputSelector: '.popup__input',
-  submitButtonSelector: '.popup__submit',
-  inactiveButtonClass: 'popup__submit_disabled',
-  inputErrorClass: 'popup__input_type_error',
-  errorClass: 'popup__input-error_active'
-};
-
-const profileValidation = new FormValidator(selectors, profileForm);
+const profileValidation = new FormValidator(validationSelectors, profileForm);
 profileValidation.enableValidation();
 
-const newCardValidation = new FormValidator(selectors, cardForm);
+const newCardValidation = new FormValidator(validationSelectors, cardForm);
 newCardValidation.enableValidation();
 
 const userInfo = new UserInfo('.profile__name', '.profile__about');
