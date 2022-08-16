@@ -58,7 +58,11 @@ imagePopup.setEventListeners();
 const cardPopup = new PopupWithForm('.popup_type_card', addCard);
 cardPopup.setEventListeners();
 
-const profilePopup = new PopupWithForm('.popup_type_profile', data => userInfo.setUserInfo(data));
+const profilePopup = new PopupWithForm('.popup_type_profile', data => {
+  api.patchUserInfo(data)
+    .then(data => userInfo.setUserInfo(data))
+    .catch(err => console.log(err))
+});
 profilePopup.setEventListeners();
 
 function openProfilePopup() {

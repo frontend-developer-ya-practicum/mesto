@@ -6,28 +6,42 @@ class Api {
 
   getInitialCards() {
     return fetch(this._baseUrl + '/cards', {
-      headers: this._headers
+      headers: this._headers,
     })
-      .then(res => {
-        if (res.ok) {
-          return res.json()
-        }
-        return Promise.reject(
-          `Ошибка при загрузке карточек: ${res.status}`)
-      })
+      .then(resp => this._checkResp(
+        resp, "Ошибка при загрузке карточек")
+      )
   }
 
   getUserInfo() {
     return fetch(this._baseUrl + '/users/me', {
-      headers: this._headers
+      headers: this._headers,
     })
-      .then(res => {
-        if (res.ok) {
-          return res.json()
-        }
-        return Promise.reject(
-          `Ошибка при загрузке информации о пользователе: ${res.status}`)
-      })
+      .then(resp => this._checkResp(
+        resp, "Ошибка при загрузке информации о пользователе")
+      )
+
+  }
+
+  patchUserInfo({ name, about }) {
+    return fetch(this._baseUrl + '/users/me', {
+      method: 'PATCH',
+      headers: this._headers,
+      body: JSON.stringify({
+        name: name,
+        about: about,
+      }),
+    })
+      .then(resp => this._checkResp(
+        resp, "Ошибка при редактировании профиля")
+      )
+  }
+
+  _checkResp(resp, errorMessage) {
+    if (resp.ok) {
+      return resp.json()
+    }
+    return Promise.reject(`${errorMessage}: ${resp.status}`)
   }
 }
 
