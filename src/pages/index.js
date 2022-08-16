@@ -17,7 +17,7 @@ import {
 } from '../scripts/utils/constants.js';
 
 function createCard(cardItem) {
-  const card = new Card(cardItem, '#template-card', imagePopup.open.bind(imagePopup));
+  const card = new Card(cardItem, '#template-card', data => imagePopup.open(data));
   return card.generateCard();
 }
 
@@ -28,6 +28,8 @@ function addCard(cardItem) {
 
 const cardsList = new Section({ renderer: addCard }, '.cards__grid');
 
+const userInfo = new UserInfo('.profile__name', '.profile__about');
+
 const api = new Api({
   baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-48',
   headers: {
@@ -37,9 +39,11 @@ const api = new Api({
 });
 
 api.getInitialCards()
-  .then(cardsItems => {
-    cardsList.renderItems(cardsItems);
-  })
+  .then(cardsItems => cardsList.renderItems(cardsItems))
+  .catch(err => console.log(err))
+
+api.getUserInfo()
+  .then(data => userInfo.setUserInfo(data))
   .catch(err => console.log(err))
 
 const profileValidation = new FormValidator(validationSelectors, profileForm);
@@ -47,8 +51,6 @@ profileValidation.enableValidation();
 
 const newCardValidation = new FormValidator(validationSelectors, cardForm);
 newCardValidation.enableValidation();
-
-const userInfo = new UserInfo('.profile__name', '.profile__about');
 
 const imagePopup = new PopupWithImage('.popup_type_image');
 imagePopup.setEventListeners();
