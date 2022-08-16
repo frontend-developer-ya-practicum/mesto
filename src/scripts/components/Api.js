@@ -13,6 +13,20 @@ class Api {
       )
   }
 
+  postCard({ name, link }) {
+    return fetch(this._baseUrl + '/cards', {
+      method: 'POST',
+      headers: this._headers,
+      body: JSON.stringify({
+        name: name,
+        link: link,
+      }),
+    })
+      .then(resp => this._checkResp(
+        resp, "Ошибка при добавлении новой карточки")
+      )
+  }
+
   getUserInfo() {
     return fetch(this._baseUrl + '/users/me', {
       headers: this._headers,
