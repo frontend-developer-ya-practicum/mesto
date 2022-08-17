@@ -1,14 +1,15 @@
 class Card {
   constructor(cardData, cardSelector, openImagePopup) {
-    this._cardData = cardData
-    this._cardSelector = cardSelector
-    this._openImagePopup = openImagePopup
+    this._cardData = cardData;
+    this._cardSelector = cardSelector;
+    this._openImagePopup = openImagePopup;
   }
 
   generateCard() {
     this._element = this._getTemplate();
 
     this._buttonLike = this._element.querySelector('.card__like-button');
+    this._likesCount = this._element.querySelector('.card__like-count');
     this._buttonDelete = this._element.querySelector('.card__delete-button');
 
     this._cardImage = this._element.querySelector('.card__image');
@@ -17,6 +18,8 @@ class Card {
     this._cardImage.src = this._cardData.link;
     this._cardImage.alt = this._cardData.name;
     this._cardTitle.textContent = this._cardData.name;
+    this._likesCount.textContent = this._cardData.likes.length;
+    this._id = this._cardData._id;
 
     this._setEventListeners();
 
