@@ -81,6 +81,19 @@ class Api {
       )
   }
 
+  patchUserAvatar({ avatar }) {
+    return fetch(this._baseUrl + '/users/me/avatar', {
+      method: 'PATCH',
+      headers: this._headers,
+      body: JSON.stringify({
+        avatar: avatar,
+      }),
+    })
+      .then(resp => this._checkResp(
+        resp, "Ошибка при обновлении аватара пользователя")
+      )
+  }
+
   _checkResp(resp, errorMessage) {
     if (resp.ok) {
       return resp.json()

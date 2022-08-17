@@ -49,7 +49,7 @@ class Card {
     const method = isActive ? this._api.deleteLike : this._api.putLike;
     method.bind(this._api)({ cardId: this._id })
       .then(data => this._renderLike(data))
-      .catch(err => console.log(err));
+      .catch(err => console.log(err))
   }
 
   _renderLike({ likes }) {
@@ -67,7 +67,7 @@ class Card {
         this._element.remove();
         this._element = null;
       })
-      .catch(err => console.log(err));
+      .catch(err => console.log(err))
   }
 
   _setEventListeners() {
