@@ -1,8 +1,9 @@
 class Card {
-  constructor({ cardData, cardSelector, userInfo, api, openImagePopup }) {
+  constructor({ cardData, cardSelector, userInfo, api, openImagePopup, openConfirmDeletePopup }) {
     this._cardData = cardData;
     this._cardSelector = cardSelector;
     this._openImagePopup = openImagePopup;
+    this._openConfirmDeletePopup = openConfirmDeletePopup;
     this._api = api;
     this._meUserId = userInfo.id;
   }
@@ -61,8 +62,12 @@ class Card {
   }
 
   _delete() {
-    this._element.remove();
-    this._element = null;
+    this._api.deleteCard({ cardId: this._id })
+      .then(() => {
+        this._element.remove();
+        this._element = null;
+      })
+      .catch(err => console.log(err));
   }
 
   _setEventListeners() {
@@ -70,9 +75,7 @@ class Card {
       this._toggleButtonLike();
     });
     this._buttonDelete.addEventListener('click', () => {
-      this._api.deleteCard({ cardId: this._id })
-        .then(() => this._delete())
-        .catch(err => console.log(err));
+      this._openConfirmDeletePopup(() => this._delete());
     });
     this._cardImage.addEventListener('click', () => {
       this._openImagePopup(this._cardData);

@@ -23,6 +23,10 @@ function createCard(cardData) {
     userInfo: userInfo.getUserInfo(),
     api: api,
     openImagePopup: data => imagePopup.open(data),
+    openConfirmDeletePopup: (handler) => {
+      confirmCardDeletePopup.setHandleSubmit(handler);
+      confirmCardDeletePopup.open();
+    }
   });
   return card.generateCard();
 }
@@ -74,6 +78,9 @@ const profilePopup = new PopupWithForm('.popup_type_profile', data => {
     .catch(err => console.log(err))
 });
 profilePopup.setEventListeners();
+
+const confirmCardDeletePopup = new PopupWithForm('.popup_type_confirm')
+confirmCardDeletePopup.setEventListeners();
 
 function openProfilePopup() {
   const { name, about } = userInfo.getUserInfo();
