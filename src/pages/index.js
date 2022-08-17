@@ -59,16 +59,13 @@ const api = new Api({
   },
 });
 
-api.getInitialCards()
-  .then(cardsItems => cardsList.renderItems(cardsItems))
-  .catch(err => console.log(err))
-
-api.getUserInfo()
-  .then(data => {
-    userInfo.setUserInfo(data);
-    userInfo.setUserAvatar(data);
+Promise.all([api.getUserInfo(), api.getInitialCards()])
+  .then(([userData, cards]) => {
+    userInfo.setUserInfo(userData);
+    userInfo.setUserAvatar(userData);
+    cardsList.renderItems(cards);
   })
-  .catch(err => console.log(err))
+  .catch(err => console.log(err));
 
 const profileValidation = new FormValidator(validationSelectors, profileForm);
 profileValidation.enableValidation();
@@ -83,16 +80,12 @@ const imagePopup = new PopupWithImage('.popup_type_image');
 imagePopup.setEventListeners();
 
 const cardPopup = new PopupWithForm('.popup_type_card', data => {
-  return api.postCard(data)
-    .then(data => addCard(data))
-    .catch(err => console.log(err))
+  return api.postCard(data).then(data => addCard(data));
 });
 cardPopup.setEventListeners();
 
 const profilePopup = new PopupWithForm('.popup_type_profile', data => {
-  return api.patchUserInfo(data)
-    .then(data => userInfo.setUserInfo(data))
-    .catch(err => console.log(err))
+  return api.patchUserInfo(data).then(data => userInfo.setUserInfo(data));
 });
 profilePopup.setEventListeners();
 
@@ -100,16 +93,12 @@ const confirmCardDeletePopup = new PopupWithForm('.popup_type_confirm');
 confirmCardDeletePopup.setEventListeners();
 
 const editAvatarPopup = new PopupWithForm('.popup_type_avatar', data => {
-  return api.patchUserAvatar(data)
-    .then(data => userInfo.setUserAvatar(data))
-    .catch(err => console.log(err))
+  return api.patchUserAvatar(data).then(data => userInfo.setUserAvatar(data));
 });
 editAvatarPopup.setEventListeners();
 
 function openProfilePopup() {
-  const { name, about } = userInfo.getUserInfo();
-  profileForm.elements.name.value = name;
-  profileForm.elements.about.value = about;
+  profilePopup.setInputValues(userInfo.getUserInfo());
   profileValidation.resetValidation();
   profilePopup.open();
 }

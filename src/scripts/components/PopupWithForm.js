@@ -28,11 +28,18 @@ class PopupWithForm extends Popup {
       const text = this._submitButton.textContent;
       this._submitButton.textContent = "Сохранение...";
       this._handleFormSubmit(this._getInputValues())
+        .then(() => this.close())
+        .catch(err => console.log(err))
         .finally(() => {
-          this.close();
           this._submitButton.textContent = text;
         })
-    })
+    });
+  }
+
+  setInputValues(data) {
+    this._inputList.forEach(input => {
+      input.value = data[input.name];
+    });
   }
 
   _getInputValues() {
