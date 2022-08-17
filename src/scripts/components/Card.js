@@ -1,10 +1,9 @@
 class Card {
-  constructor({ cardData, cardSelector, userInfo, openImagePopup, putLike, deleteLike}) {
+  constructor({ cardData, cardSelector, userInfo, api, openImagePopup }) {
     this._cardData = cardData;
     this._cardSelector = cardSelector;
     this._openImagePopup = openImagePopup;
-    this._putLike = putLike;
-    this._deleteLike = deleteLike;
+    this._api = api;
     this._meUserId = userInfo.id;
   }
 
@@ -22,6 +21,11 @@ class Card {
     this._cardImage.alt = this._cardData.name;
     this._cardTitle.textContent = this._cardData.name;
     this._id = this._cardData._id;
+    this._ownerId = this._cardData.owner._id;
+
+    if (this._meUserId !== this._ownerId) {
+      this._buttonDelete.remove();
+    }
 
     this._renderLike(this._cardData);
     this._setEventListeners();
@@ -41,8 +45,8 @@ class Card {
 
   _toggleButtonLike() {
     const isActive = this._buttonLike.classList.contains('card__like-button_active');
-    const method = isActive ? this._deleteLike : this._putLike;
-    method({ cardId: this._id })
+    const method = isActive ? this._api.deleteLike : this._api.putLike;
+    method.bind(this._api)({ cardId: this._id })
       .then(data => this._renderLike(data))
       .catch(err => console.log(err));
   }
@@ -66,7 +70,9 @@ class Card {
       this._toggleButtonLike();
     });
     this._buttonDelete.addEventListener('click', () => {
-      this._delete();
+      this._api.deleteCard({ cardId: this._id })
+        .then(() => this._delete())
+        .catch(err => console.log(err));
     });
     this._cardImage.addEventListener('click', () => {
       this._openImagePopup(this._cardData);

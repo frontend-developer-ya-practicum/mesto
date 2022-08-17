@@ -21,9 +21,8 @@ function createCard(cardData) {
     cardData: cardData,
     cardSelector: '#template-card',
     userInfo: userInfo.getUserInfo(),
+    api: api,
     openImagePopup: data => imagePopup.open(data),
-    putLike: cardId => api.putLike(cardId),
-    deleteLike: cardId => api.deleteLike(cardId),
   });
   return card.generateCard();
 }
