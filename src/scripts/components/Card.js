@@ -1,8 +1,11 @@
 class Card {
-  constructor(cardData, cardSelector, openImagePopup) {
+  constructor({ cardData, cardSelector, userInfo, openImagePopup, putLike, deleteLike}) {
     this._cardData = cardData;
     this._cardSelector = cardSelector;
     this._openImagePopup = openImagePopup;
+    this._putLike = putLike;
+    this._deleteLike = deleteLike;
+    this._meUserId = userInfo.id;
   }
 
   generateCard() {
@@ -18,9 +21,9 @@ class Card {
     this._cardImage.src = this._cardData.link;
     this._cardImage.alt = this._cardData.name;
     this._cardTitle.textContent = this._cardData.name;
-    this._likesCount.textContent = this._cardData.likes.length;
     this._id = this._cardData._id;
 
+    this._renderLike(this._cardData);
     this._setEventListeners();
 
     return this._element;
@@ -37,7 +40,20 @@ class Card {
   }
 
   _toggleButtonLike() {
-    this._buttonLike.classList.toggle('card__like-button_active');
+    const isActive = this._buttonLike.classList.contains('card__like-button_active');
+    const method = isActive ? this._deleteLike : this._putLike;
+    method({ cardId: this._id })
+      .then(data => this._renderLike(data))
+      .catch(err => console.log(err));
+  }
+
+  _renderLike({ likes }) {
+    this._likesCount.textContent = likes.length;
+    if (likes.find(user => user._id === this._meUserId)) {
+      this._buttonLike.classList.add('card__like-button_active');
+    } else {
+      this._buttonLike.classList.remove('card__like-button_active');
+    }
   }
 
   _delete() {

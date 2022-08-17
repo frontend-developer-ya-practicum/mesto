@@ -27,6 +27,26 @@ class Api {
       )
   }
 
+  putLike({ cardId }) {
+    return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
+      method: 'PUT',
+      headers: this._headers,
+    })
+      .then(resp => this._checkResp(
+        resp, "Ошибка при постановке лайка")
+      )
+  }
+
+  deleteLike({ cardId }) {
+    return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
+      method: 'DELETE',
+      headers: this._headers,
+    })
+      .then(resp => this._checkResp(
+        resp, "Ошибка при снятии лайка")
+      )
+  }
+
   getUserInfo() {
     return fetch(this._baseUrl + '/users/me', {
       headers: this._headers,

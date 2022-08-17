@@ -16,13 +16,20 @@ import {
   validationSelectors
 } from '../scripts/utils/constants.js';
 
-function createCard(cardItem) {
-  const card = new Card(cardItem, '#template-card', data => imagePopup.open(data));
+function createCard(cardData) {
+  const card = new Card({
+    cardData: cardData,
+    cardSelector: '#template-card',
+    userInfo: userInfo.getUserInfo(),
+    openImagePopup: data => imagePopup.open(data),
+    putLike: cardId => api.putLike(cardId),
+    deleteLike: cardId => api.deleteLike(cardId),
+  });
   return card.generateCard();
 }
 
-function addCard(cardItem) {
-  const cardElement = createCard(cardItem);
+function addCard(cardData) {
+  const cardElement = createCard(cardData);
   cardsList.addItem(cardElement);
 }
 
