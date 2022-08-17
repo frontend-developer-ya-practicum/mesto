@@ -15,8 +15,13 @@ import {
   profileOpenButton,
   cardForm,
   cardOpenButton,
-  validationSelectors
+  validationSelectors,
 } from '../scripts/utils/constants.js';
+
+import {
+  API_ROOT,
+  API_TOKEN,
+} from '../scripts/utils/envrionment.js';
 
 function createCard(cardData) {
   const card = new Card({
@@ -47,9 +52,9 @@ const userInfo = new UserInfo({
 });
 
 const api = new Api({
-  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-48',
+  baseUrl: API_ROOT,
   headers: {
-    authorization: '***',
+    authorization: API_TOKEN,
     'Content-Type': 'application/json',
   },
 });
