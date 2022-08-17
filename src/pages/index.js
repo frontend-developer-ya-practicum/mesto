@@ -59,16 +59,13 @@ const api = new Api({
   },
 });
 
-api.getInitialCards()
-  .then(cardsItems => cardsList.renderItems(cardsItems))
-  .catch(err => console.log(err))
-
-api.getUserInfo()
-  .then(data => {
-    userInfo.setUserInfo(data);
-    userInfo.setUserAvatar(data);
+Promise.all([api.getUserInfo(), api.getInitialCards()])
+  .then(([userData, cards]) => {
+    userInfo.setUserInfo(userData);
+    userInfo.setUserAvatar(userData);
+    cardsList.renderItems(cards);
   })
-  .catch(err => console.log(err))
+  .catch(err => console.log(err));
 
 const profileValidation = new FormValidator(validationSelectors, profileForm);
 profileValidation.enableValidation();
