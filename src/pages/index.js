@@ -78,14 +78,14 @@ const imagePopup = new PopupWithImage('.popup_type_image');
 imagePopup.setEventListeners();
 
 const cardPopup = new PopupWithForm('.popup_type_card', data => {
-  api.postCard(data)
+  return api.postCard(data)
     .then(data => addCard(data))
     .catch(err => console.log(err))
 });
 cardPopup.setEventListeners();
 
 const profilePopup = new PopupWithForm('.popup_type_profile', data => {
-  api.patchUserInfo(data)
+  return api.patchUserInfo(data)
     .then(data => userInfo.setUserInfo(data))
     .catch(err => console.log(err))
 });
@@ -95,7 +95,7 @@ const confirmCardDeletePopup = new PopupWithForm('.popup_type_confirm');
 confirmCardDeletePopup.setEventListeners();
 
 const editAvatarPopup = new PopupWithForm('.popup_type_avatar', data => {
-  api.patchUserAvatar(data)
+  return api.patchUserAvatar(data)
     .then(data => userInfo.setUserAvatar(data))
     .catch(err => console.log(err))
 });

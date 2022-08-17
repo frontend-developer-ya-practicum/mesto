@@ -62,7 +62,7 @@ class Card {
   }
 
   _delete() {
-    this._api.deleteCard({ cardId: this._id })
+    return this._api.deleteCard({ cardId: this._id })
       .then(() => {
         this._element.remove();
         this._element = null;
