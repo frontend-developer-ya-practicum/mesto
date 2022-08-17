@@ -104,9 +104,7 @@ const editAvatarPopup = new PopupWithForm('.popup_type_avatar', data => {
 editAvatarPopup.setEventListeners();
 
 function openProfilePopup() {
-  const { name, about } = userInfo.getUserInfo();
-  profileForm.elements.name.value = name;
-  profileForm.elements.about.value = about;
+  profilePopup.setInputValues(userInfo.getUserInfo());
   profileValidation.resetValidation();
   profilePopup.open();
 }

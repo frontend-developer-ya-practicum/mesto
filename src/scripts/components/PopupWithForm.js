@@ -32,7 +32,13 @@ class PopupWithForm extends Popup {
           this.close();
           this._submitButton.textContent = text;
         })
-    })
+    });
+  }
+
+  setInputValues(data) {
+    this._inputList.forEach(input => {
+      input.value = data[input.name];
+    });
   }
 
   _getInputValues() {
